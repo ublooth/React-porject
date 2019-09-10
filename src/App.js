@@ -8,7 +8,8 @@ class App extends Component {
   constructor() { // 首先执行初始化函数(构造方法)
     super(); //必须先调用 super()
     this.state = {
-      homeLink:"HeaderHome"
+      homeLink:"HeaderHome",
+      homeMounted: true 
     }
   }
   onGreet(age) {
@@ -21,7 +22,24 @@ class App extends Component {
     })
   }
 
+  onChangeHomeMounted() {
+    this.setState({
+      homeMounted: !this.state.homeMounted //取反
+    })
+  }
   render() {// 一个组件类必须要实现一个 render 方法，这个 render 方法必须要返回一个 JSX 元素。
+    let homeCmp = '';
+    if(this.state.homeMounted) {
+      homeCmp = (
+        <Home
+          name={'Max'}
+          initialAge={12}
+          greet={this.onGreet}
+          changeLink={this.onChangeLinkName.bind(this)}
+          initialName={this.state.homeLink}
+        />
+      );
+    }
     return (
       <div className="container">
         <div className="row">
@@ -36,16 +54,18 @@ class App extends Component {
         </div>
         <div className="row">
           <div className="col-xs-1 col-xs-offset-11">
-            <Home
-             name={'Max'}
-             initialAge={12}
-             user={user}
-             greet={this.onGreet}
-             changeLink={this.onChangeLinkName.bind(this)}/>
+            {homeCmp}
           </div>
         </div>
-        <p>兄弟组件通过父组件传递数据</p>
-        <p>Home子组件点击按钮触发事件改变Home父组件传递的changeLink的数据，changeLink会触发App总父组件的onChangeLinkName事件改变homeLink的数据，根据setState的返回值改变Header组件的数据</p>
+        <hr/>
+        <div className="row">
+          <div className="col-xs-1 col-xs-offset-11">
+            <button
+             className="btn btn-primary"
+             onClick={() => this.onChangeHomeMounted()}
+             >Home组件移出/入DOM</button>
+          </div>
+        </div>
       </div>
     );
   }
