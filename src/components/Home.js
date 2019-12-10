@@ -16,6 +16,7 @@ export default class Home extends Component {
         status: 1
       })
     }, 2000);
+    console.log("在 React 组件挂载之前，会调用它的构造函数constructor()>挂载no1")
   }
 
   onMakeOlder() {
@@ -33,7 +34,7 @@ export default class Home extends Component {
   }
   
   getVal(e) {
-    console.log(this.input.value)  // DOM元素
+    // console.log(this.input.value)  // DOM元素
     let val = e.target.value;
     // this.setState({  // 修改数据方法1
     //   status: val
@@ -49,11 +50,46 @@ export default class Home extends Component {
     this.setState(() => {
       return {
         list: this.state.list.concat(this.state.status2),
-        status2: '',
+        // status2: '',
       }
     });
     this.props.changeAppText(this.state.status2);
   }
+
+  // getDerivedStateFromProps 会在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { type } = nextProps;
+    // 当传入的type发生变化的时候，更新state
+    if (type !== prevState.type) {
+      return {
+        type,
+      };
+    }
+    // 否则，对于state不进行任何操作
+    return null;
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount 会在组件挂载后（插入 DOM 树中）立即调用。依赖于 DOM 节点的初始化应该放在这里。如需通过网络请求获取数据，此处是实例化请求的好地方。")
+  }
+
+  // 返回一个布尔值。在组件接收到新的props或者state时被调用。 true更新DOM，false不更新
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log('Component should update', nextProps, nextState);
+    if (nextState.status === 1) {
+      return true;
+    }
+    return false;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('在组件完成更新后立即调用。在初始化时不会被调用。', prevProps, prevState);
+  }
+
+  componentWillUnmount() {
+    console.log('当组件从 DOM 中移除时会调用');
+  }
+
 
   // 一个组件类必须要实现一个 render 方法，这个 render 方法必须要返回一个 JSX 元素。
   render() {

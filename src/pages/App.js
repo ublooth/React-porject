@@ -9,6 +9,7 @@ export default class App extends Component {
     this.state = {
       homeLink: 'Home',
       appText: 'test',
+      homeMounted: true
     }
   }
 
@@ -31,17 +32,20 @@ export default class App extends Component {
     alert(age);
   }
 
+  changeHomeMounted() {
+    this.setState({
+      homeMounted: !this.state.homeMounted
+    })
+  }
+
   render() {
     const user = { // 父组件的数据
       name: "Anna",
       hobbies: ["Sports", "Reading"]
-    }
-    return (
-      <div>
-        <Header homeLink={ this.state.homeLink }/>
-        {/* header 的数据为 App 的state的homeLink */}
-        <h1>hello !!</h1>
-        <h2>{ this.state.appText }</h2>
+    };
+    let homeComp = '';
+    if (this.state.homeMounted) {
+      homeComp = (
         <Home
           name={ "Max" }
           age={ 12 }
@@ -52,6 +56,17 @@ export default class App extends Component {
         >
           <p>i am child</p> 
         </Home>
+      )
+    }
+    return (
+      <div>
+        <Header homeLink={ this.state.homeLink }/>
+        {/* header 的数据为 App 的state的homeLink */}
+        <h1>hello !!</h1>
+        <h2>{ this.state.appText }</h2>
+        { homeComp }
+        <hr />
+        <button onClick={ this.changeHomeMounted.bind(this) } className="btn btn-primary">true/false</button>
       </div>
     );
   }
