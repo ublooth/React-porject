@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'; // react语法
+import ReactDOM from 'react-dom';  // react语法
 import './index.css';
-import App from './App';
+import App from './pages/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
