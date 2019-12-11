@@ -17,6 +17,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'; // �
 
 import List from '../components/List'; // 组件Header
 import Home from '../components/Home'; // 组件Home
+import Header from '../components/Header'; // 组件Home
 
 class App extends Component {
   render() {
@@ -32,6 +33,7 @@ class App extends Component {
           <Switch>
             <Route path='/' exact component={ Home }></Route>
             <Route path='/list' exact component={ List }></Route>
+            <Route path='/header' exact component={ Header }></Route>
             <Redirect to='/' />
           </Switch>
         </BrowserRouter>

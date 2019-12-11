@@ -8,6 +8,9 @@ class Header extends Component {
       </div>
     );
   }
+  componentDidMount() { 
+    console.log('11', this.props.location.query) // 获取URL参数 方法2
+  }
 }
 
 export default Header;
