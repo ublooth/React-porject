@@ -1,73 +1,42 @@
 import React, { Component } from 'react';
-import Header from '../components/Header'; // 组件Header
+
+// import { HashRouter, Route } from 'react-router-dom'; // 引入路由
+// HashRouter 路由的大组件 > http://localhost:3000/#/   路径区别
+
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'; // 引入路由
+// BrowserRouter 路由的大组件 > http://localhost:3000/  路径区别
+// Route:组件的配置项 >> 
+//     path      ：访问的路径
+//     component ：对应的组件
+//     exact     : 控制匹配的路由不会向下匹配，只支持对应的组件内容
+// Redirect: 重定向
+//     to  : 跳转到哪个组件
+// Switch: 判断路由路径是否符合，符合跳转到指定路径，不符合重定向
+
+
+
+import List from '../components/List'; // 组件Header
 import Home from '../components/Home'; // 组件Home
 
-export default class App extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      homeLink: 'Home',
-      appText: 'test',
-      homeMounted: true
-    }
-  }
-
-  onChangeLinkNmae(newName) { // 改变homeLink
-    this.setState({
-      homeLink: newName
-    })
-  }
-
-  setAppText(val) {
-    this.setState(() => {
-      return {
-        appText: val
-      }
-    })
-  }
-
-  // 子组件向父组件传值
-  onGreet(age) { // age是子组件的数据
-    alert(age);
-  }
-
-  changeHomeMounted() {
-    this.setState({
-      homeMounted: !this.state.homeMounted
-    })
-  }
-
+class App extends Component {
   render() {
-    const user = { // 父组件的数据
-      name: "Anna",
-      hobbies: ["Sports", "Reading"]
-    };
-    let homeComp = '';
-    if (this.state.homeMounted) {
-      homeComp = (
-        <Home
-          name={ "Max" }
-          age={ 12 }
-          user={ user }
-          greet={ this.onGreet }
-          changeLink={ this.onChangeLinkNmae.bind(this) }
-          changeAppText= { this.setAppText.bind(this) }
-        >
-          <p>i am child</p> 
-        </Home>
-      )
-    }
     return (
       <div>
-        <Header homeLink={ this.state.homeLink }/>
-        {/* header 的数据为 App 的state的homeLink */}
-        <h1>hello !!</h1>
-        <h2>{ this.state.appText }</h2>
-        { homeComp }
-        <hr />
-        <button onClick={ this.changeHomeMounted.bind(this) } className="btn btn-primary">true/false</button>
+        {/* <HashRouter>
+          <div>
+            <Route path='/' component={ Home }></Route>
+            <Route path='/list' component={ List }></Route>
+          </div>
+        </HashRouter> */}
+        <BrowserRouter>
+          <Switch>
+            <Route path='/' exact component={ Home }></Route>
+            <Route path='/list' exact component={ List }></Route>
+            <Redirect to='/' />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
 }
+export default App;
