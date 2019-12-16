@@ -71,3 +71,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 #### 路由命令： cnpm install react-router-dom --save
+
+#### Redux安装： cnpm install redux --save
+     在src目录下创建store目录>>index.js
