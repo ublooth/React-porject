@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Router from './pages/router/router';
+import './overall/rem'; // 自适应
 
-ReactDOM.render(<App />, document.getElementById('root')); // 渲染组件
+ReactDOM.render(<Router />, document.getElementById('root')); // 渲染组件

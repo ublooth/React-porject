@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { getPopCityList } from './api/api.js';
+import React, { Component } from 'react'
+import { getPopCityList } from '../../api/api.js';
 
-class App extends Component {
+class City extends Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -16,12 +16,16 @@ class App extends Component {
     })
   }
   render() {
-    return (
-      <div className="App">
-        123123
+    return(
+      <div>
+        2222
+        <button onClick={ this.toGoBack.bind(this) }>返回</button>
       </div>
     );
   }
+  toGoBack() {
+    this.props.history.goBack();
+  }
 }
 
-export default App;
+export default City;

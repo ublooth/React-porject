@@ -119,3 +119,14 @@ class App extends Component{
   }
 }
 ```
+
+### 路由命令： cnpm install react-router-dom --save
+
+### 修改端口号
+```
+ // 在node_modules文件夹里的可以看到react-scripts文件夹，在start.js里可以找到修改端口的代码
+
+// Tools like Cloud9 rely on this.
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000; // 3000端口号
+const HOST = process.env.HOST || '0.0.0.0';
+```
