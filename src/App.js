@@ -21,11 +21,14 @@ class App extends Component{
     this.getSliderList();
   }
   getSliderList(){
-    // axios.get(`/v1/cities?type=hot`)
-    //   .then((res) => {
-    //     console.log('请求返回的数据');
-    //     console.log(res.data)//此接口返回数据为jsonp格式，须进一步对数据进行处理
-    //   });
+    axios({
+      method: "GET",
+      url: `/v1/cities?type=hot`,
+    })
+      .then((res) => {
+        console.log('请求返回的数据');
+        console.log(res.data)//此接口返回数据为jsonp格式，须进一步对数据进行处理
+      });
   }
   render() {
     return (

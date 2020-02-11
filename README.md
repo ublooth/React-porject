@@ -66,3 +66,56 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### 跨域请求
+
+#### 第一步 安装 http-proxy-middleware
+npm install http-proxy-middleware
+我们这里面请求用的axios，在将axios安装一下
+npm install axios
+##### 第二步 src下创建一个 setupProxy.js文件
+```
+const proxy = require('http-proxy-middleware');
+
+module.exports = function (app) {
+  app.use(
+    proxy('/v1', {  //是需要转发的请求
+      target: 'http://cangdu.org:8001',  // 这里是接口服务器地址
+      changeOrigin: true,
+      secure: false,
+      pathRewrite: {
+        "^/commonredirect": "/"
+      },
+    })
+  )
+};
+```
+#### 第三步 需要发送请求的地方 使用
+```
+class App extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+  componentDidMount() {
+    this.getSliderList();
+  }
+  getSliderList(){
+    axios({
+      method: "GET",
+      url: `/v1/cities?type=hot`,
+    })
+      .then((res) => {
+        console.log('请求返回的数据');
+        console.log(res.data)//此接口返回数据为jsonp格式，须进一步对数据进行处理
+      });
+  }
+  render() {
+    return (
+      <div className="App">
+        123123
+      </div>
+    );
+  }
+}
+```
