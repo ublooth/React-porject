@@ -12,3 +12,4 @@ module.exports = function (app) {
     })
   )
 };
+console.log("process.env.NODE_ENV1", process.env.NODE_ENV)
