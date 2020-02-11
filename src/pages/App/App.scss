@@ -1,0 +1,7 @@
+@import '../style/mixin.scss' ;
+
+.App {
+  .head {
+    @include font(20px, red, center)
+  }
+}
