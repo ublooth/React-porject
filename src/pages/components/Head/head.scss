@@ -1,0 +1,22 @@
+@import '../../style/mixin.scss' ;
+
+.head-head {
+  @include wh(100%, 45px);
+  background: #3190e8;
+  line-height: 45px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  .head-name,
+  .head-login {
+    display: inline-block;
+    @include sc(16px, #fff)
+  }
+  .head-name {
+    margin-left: 10px;
+  }
+  .head-login {
+    float: right;
+    margin-right: 10px;
+  }
+}

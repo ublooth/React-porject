@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.interceptors.response.use(response => { // 请求正确
   if (response.status === 200 && response.data) {
-    console.log('response', response)
+    // console.log('response', response)
     return response;
   } else {
     console.log('response.data.message', response.data)
@@ -22,11 +22,24 @@ axios.interceptors.response.use(response => { // 请求正确
 let date = new Date();
 let timer = date.getTime().toString();
 
-function request(method, url, data) {
+// function post(method, url, obj) {
+//   obj.t = timer;
+//   return axios({
+//     method: method,
+//     url: url,
+//     data: obj,
+//     headers: {
+//       'X-Requested-With': 'XMLHttpRequest',
+//       'Content-Type': 'application/json',
+//     }
+//   })
+// }
+function get(method, url, params) {
+  params.t = timer;
   return axios({
     method: method,
-    url: url + `&t=${timer}`,
-    data: data,
+    url: url,
+    params,
     headers: {
       'X-Requested-With': 'XMLHttpRequest',
       'Content-Type': 'application/json',
@@ -35,4 +48,7 @@ function request(method, url, data) {
 }
 
 // 热门城市列表
-export const getPopCityList = () => request('get', '/v1/cities?type=hot')
+export const getPopCityList = (obj) => get('get', '/v1/cities', obj)
+
+// 所有城市
+export const getAllCityList = (obj) => get('get', '/v1/cities', obj)

@@ -18,6 +18,10 @@ $common-right: 0.6rem;
   color: $color;
   text-align: $text-align;
 }
+@mixin sc($size, $color){
+  font-size: $size;
+  color: $color;
+}
 
 // flex布局
 @mixin flex($justify-content: center, $align-items: center) {
