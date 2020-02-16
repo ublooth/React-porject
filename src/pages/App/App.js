@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import '../style/base.scss'
 import './App.scss'
-import Head from '../components/Head/head'
 import { getPopCityList, getAllCityList } from '../../api/api.js';
 
 class App extends Component {
@@ -53,12 +51,15 @@ class App extends Component {
     });
   }
   getId(id) {
-    console.log("id", id)
+    this.props.history.push('/city/' + id)
   }
   render() {
     return (
       <div className="App">
-        <Head></Head>
+        <div className="head-head">
+          <div className="head-name">ele.me</div>
+          <div className="head-login">登录|注册</div>
+        </div>
         <div className="App-current">
           <div className="app-currentHead">
             <span>当前定位城市：{this.state.url}</span>
@@ -102,7 +103,6 @@ class App extends Component {
             </div>
           )
         }
-        <Link to='/city'>123123</Link>
       </div>
     );
   }

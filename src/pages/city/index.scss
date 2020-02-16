@@ -1,0 +1,42 @@
+@import "../style/mixin.scss";
+
+.city {
+  padding-top: 50px;
+  .head-head {
+    padding-right: 10px;
+    text-align: center;
+    .more {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .more:after {
+      border-color: #666;
+      position: absolute;
+      content: '';
+      width: .6em;
+      height: .6em;
+      border-right: 2px solid #fff;
+      border-top: 2px solid #fff;
+      transform: translateY(-50%) scaleY(.7) rotateZ(-135deg);
+      -webkit-transform: translateY(-50%) scaleY(.7) rotateZ(-135deg);
+      -moz-transform: translateY(-50%) scaleY(.7) rotateZ(-135deg);
+      -ms-transform: translateY(-50%) scaleY(.7) rotateZ(-135deg); 
+    }
+    .name {
+      @include sc(16px, #fff);
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .tapi {
+      @include sc(14px, #fff);
+      float: right;
+      
+    }
+  }
+  
+}

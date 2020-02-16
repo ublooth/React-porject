@@ -34,10 +34,10 @@ let timer = date.getTime().toString();
 //     }
 //   })
 // }
-function get(method, url, params) {
+function get(url, params) {
   params.t = timer;
   return axios({
-    method: method,
+    method: 'GET',
     url: url,
     params,
     headers: {
@@ -48,7 +48,10 @@ function get(method, url, params) {
 }
 
 // 热门城市列表
-export const getPopCityList = (obj) => get('get', '/v1/cities', obj)
+export const getPopCityList = (obj) => get('/v1/cities', obj)
 
 // 所有城市
-export const getAllCityList = (obj) => get('get', '/v1/cities', obj)
+export const getAllCityList = (obj) => get('/v1/cities', obj)
+
+// 获取当前所在城市
+export const currentcity = (number, obj) => get('/v1/cities/' + number, obj);

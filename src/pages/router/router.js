@@ -9,7 +9,7 @@ const router = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={ App }></Route>
-      <Route path="/city" exact component={ City }></Route>
+      <Route path="/city/:id" exact component={ City }></Route>
       <Redirect to='/' />
     </Switch>
   </BrowserRouter>

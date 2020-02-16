@@ -1,39 +1,43 @@
 import React, { Component } from 'react'
-import { getPopCityList } from '../../api/api.js';
+import { currentcity } from '../../api/api'
+import './index.scss'
 
-import Head from '../components/Head/head'
 class City extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: '',
+      cityNnme: '',
     }
   }
   componentDidMount() {
     this.getSliderList();
   }
   getSliderList() {
-    getPopCityList().then(res => {
-      console.log('请求返回的数据');
-      console.log('getCityList', res)
+    // 获取当前所在城市
+    currentcity(this.props.match.params.id, {}).then(res => {
+      if(res.status === 200) {
+        this.setState({
+          cityNnme: res.data.name
+        })
+      }
     })
-    this.setState({
-      url : this.props.match.path
-    })
-    
-    console.log('state.url', this.state.url) 
-  }
-  render() {
-    return(
-      <div>
-        <Head></Head>
-        2222
-        <button onClick={ this.toGoBack.bind(this) }>返回</button>
-      </div>
-    );
   }
   toGoBack() {
     this.props.history.goBack();
+  }
+  render() {
+    return(
+      <div className="city">
+        <div className="head-head">
+          <span className="more" onClick={ this.toGoBack.bind(this) }></span>
+          <span className="name">{ this.state.cityNnme }</span>
+          <span className="tapi" onClick={ this.toGoBack.bind(this) }>切换城市</span>
+        </div>
+        <div>
+          asas
+        </div>
+      </div>
+    );
   }
 }
 
