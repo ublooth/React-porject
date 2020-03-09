@@ -83,12 +83,10 @@ class App extends Component {
         </div>
         {
           Object.keys(this.state.allCity).map(
-            (item, i) => <div className="app-city-all"
-              key={i}
-            >
+            (item, i) => <div className="app-city-all" key={i}>
               <div className="allHead">
                 <span>{item}</span>
-                <span style={i === 0 ? { display: 'inline-block' } : { display: 'none' }}>（按字母排序）</span>
+                { i === 0 && <span style={{ display: 'inline-block' }}>（按字母排序）</span> }
               </div>
               <ul className="strLIist">
                 {this.state.allCity[item].map((str, z) =>

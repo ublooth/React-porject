@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { currentcity } from '../../api/api'
 import './index.scss'
+import { Toast } from 'antd-mobile';
 
 class City extends Component {
   constructor(props) {
     super(props);
     this.state = {
       cityNnme: '',
+      searchData: '',
     }
   }
   componentDidMount() {
@@ -25,6 +27,16 @@ class City extends Component {
   toGoBack() {
     this.props.history.goBack();
   }
+  searchClick() {
+    if(!this.state.searchData) {
+      Toast.info('This is a toast tips !!!', 1);
+    }
+  }
+  change(e) {
+    this.setState({
+      searchData: e.target.value
+    })
+  }
   render() {
     return(
       <div className="city">
@@ -33,9 +45,24 @@ class City extends Component {
           <span className="name">{ this.state.cityNnme }</span>
           <span className="tapi" onClick={ this.toGoBack.bind(this) }>切换城市</span>
         </div>
-        <div>
-          asas
+        <div className="search">
+          <div>
+            <input type="text" className="text-input" onChange={ this.change.bind(this) } defaultValue={this.state.searchData} placeholder="输入学校、商务楼、地址"/>
+          </div>
+          <div>
+            <button onClick={ this.searchClick.bind(this) }>提交</button>
+          </div>
         </div>
+        <p className="search-History">搜索历史</p>
+        <div className="search-list">
+          <ul>
+            <li>
+              <p>汉堡店</p>
+              <p>一栏陆</p>
+            </li>
+          </ul>
+        </div>
+        <div className="emptyingAll">清空所有</div>
       </div>
     );
   }
