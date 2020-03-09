@@ -82,6 +82,11 @@
           @include sc(12px, #999);
         }
       }
+      .sorry {
+        line-height: 30px;
+        text-align: center;
+        @include sc(16px, #666);
+      }
     }
   }
   .emptyingAll {

@@ -55,3 +55,6 @@ export const getAllCityList = (obj) => get('/v1/cities', obj)
 
 // 获取当前所在城市
 export const currentcity = (number, obj) => get('/v1/cities/' + number, obj);
+
+// 搜索地址
+export const searchplace = (obj) => get('/v1/pois/', obj);

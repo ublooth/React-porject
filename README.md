@@ -195,3 +195,8 @@ npm install node-sass
 
 npm audit fix // 修复提示漏洞
 ```
+### 安装手机端UI库
+https://mobile.ant.design/docs/react/introduce-cn
+```
+npm install antd-mobile --save
+```
