@@ -12,15 +12,26 @@ class City extends Component {
       cityId: '',
       searchData: '',
       searchArr: [],
+      searchClickBool: false, // 搜索事件
       searchBool: false,
       storeData: null,
     }
   }
   componentDidMount() {
     this.getSliderList();
-    this.setState({ // 搜索历史记录
-      storeData: JSON.parse(getStore('cityStore'))
-    })
+    this.getStoreData(); // 获取搜索记录
+  }
+  getStoreData() {
+    console.log('---====', getStore('cityStore'))
+    if(getStore('cityStore')) {
+      this.setState({ // 搜索历史记录
+        storeData: JSON.parse(getStore('cityStore'))
+      });
+    } else {
+      this.setState({ // 搜索历史记录
+        storeData: null
+      });
+    }
   }
   getSliderList() {
     // 获取当前所在城市
@@ -46,12 +57,23 @@ class City extends Component {
       city_id: this.state.cityId,
       keyword: this.state.searchData
     }).then(res => {
-      console.log("res", res)
       if(res.status === 200) {
-        this.setState({
-          searchArr: res.data,
-          searchBool: true
-        })
+        if(res.data.length) {
+          this.setState({
+            searchArr: res.data,
+            searchBool: true,
+            searchClickBool: true,
+            storeData: null
+          })
+        } else {
+          this.setState({
+            searchArr: [],
+            searchBool: false,
+            searchClickBool: true,
+            storeData: null
+          })
+        }
+        
       }
     })
   }
@@ -61,11 +83,27 @@ class City extends Component {
     })
   }
   clickCity(item) {
-    console.log('item', item)
-    setStore('cityStore', [item])
+    let localCity = getStore('cityStore');
+    console.log('====', localCity)
+    if(localCity) {
+      localCity = JSON.parse(localCity)
+      let localCityBool = false;
+      for(let i = 0;i < localCity.length;i++) {
+        if(localCity[i].geohash === item.geohash) { // 已有数据不储存
+          localCityBool = true;
+          break
+        }
+      }
+      if(!localCityBool) {
+        localCity = localCity.concat(item)
+      }
+    } else {
+      localCity = localCity.concat(item)
+    }
+    setStore('cityStore', localCity)
   }
   render() {
-    const {searchArr, searchBool, storeData} = this.state;
+    const {searchArr, searchBool, storeData, searchClickBool} = this.state;
     return(
       <div className="city">
         <div className="head-head">
@@ -81,31 +119,31 @@ class City extends Component {
             <button onClick={ this.searchClick.bind(this) }>提交</button>
           </div>
         </div>
-        <p className="search-History">搜索历史</p>
+        { storeData && storeData.length && <p className="search-History">搜索历史</p> }
         <div className="search-list">
           <ul>
             {
-              searchArr.map((item, i) => (
+              searchBool && searchArr.map((item, i) => (
                 <li key={ i } onClick={ this.clickCity.bind(this, item) }>
                   <p>{ item.name }</p>
                   <p>{ item.address }</p>
                 </li>
               ))
             }
-            {/* {
-              storeData.map((str, n) => (
+            {
+              storeData && storeData.length && storeData.map((str, n) => (
                 <li key={ n } onClick={ this.clickCity.bind(this, str) }>
                   <p>{ str.name }</p>
                   <p>{ str.address }</p>
                 </li>
               ))
-            } */}
+            }
             {
-              !searchArr.length && searchBool && <li className="sorry">很抱歉！无搜索结果</li>
+              !searchBool && searchClickBool && <li className="sorry">很抱歉！无搜索结果</li>
             }
           </ul>
         </div>
-        <div className="emptyingAll">清空所有</div>
+        { storeData && storeData.length && <div className="emptyingAll">清空所有</div> }
       </div>
     );
   }
