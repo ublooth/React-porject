@@ -13,6 +13,8 @@ import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom'  // �
 import Index from '../index/App'
 import Home from '../home/home'
 import List from '../list/list'
+import Header from '../header/header'
+import Box from '../box/box'
 
 class routerList extends Component {
   render() {
@@ -23,6 +25,10 @@ class routerList extends Component {
             <Route path="/" exact component={ Index }></Route>
             <Route path="/home" exact component={ Home }></Route>
             <Route path="/list" exact component={ List }></Route>
+
+            {/* 路由带参数1 */}
+            <Route path="/header/:id" exact component={ Header }></Route>
+            <Route path="/box" exact component={ Box }></Route>
             <Redirect to='/' />
           </Switch>
         </BrowserRouter>

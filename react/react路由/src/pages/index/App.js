@@ -8,6 +8,8 @@ function App() {
       <ul>
         <li><Link to='/home'>跳转到home页面</Link></li>
         <li><Link to='/list'>跳转到list页面</Link></li>
+
+        <li><Link to='/header/10'>跳转到header页面</Link></li>
       </ul>
     </div>
   );
