@@ -22,16 +22,30 @@ export default class Test extends Component {
     })
   }
 
+////// 父组件触发子组件事件
+  // 此事件接收子对象
+  childEvevnt = childDate => {
+    this.$Com = childDate;
+  };
+  // 父组件触发子组件的事件
+  triggerEvevt = () => {
+    this.$Com.alertEvevnt();
+  };
+////// 父组件触发子组件事件
+
+
   // 一个组件类必须要实现一个 render 方法，这个 render 方法必须要返回一个 JSX 元素。
   render() {
     return (
       <div>
         { this.state.text }
+        <button onClick={this.triggerEvevt}>我是test父组件,触发子组件事件</button>
         <div style={ this.state.bool ? {color: "blue"} : {color: "red"} }>com子组件事件触发父组件事件</div>
         <Com
           name={ this.state.name }
           changeClick={ this.method }
           sonClick={ this.sonClick }
+          childEvevnt={this.childEvevnt}
         ></Com>
       </div>
     )

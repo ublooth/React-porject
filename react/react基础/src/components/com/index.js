@@ -23,9 +23,22 @@ export default class Com extends Component {
   fatherClick() {
     this.props.changeClick()
   }
+
+
+  ////// 父组件触发子组件事件
+  componentDidMount() { // 加载后执行
+    this.props.childEvevnt(this);
+  }
+  // 父组件要触发的事件
+  alertEvevnt = () => {
+    alert("父呼唤我呢!!");
+  };
+  ////// 父组件触发子组件事件
+
+
   render() {
    return (
-     <div style={{border: "1px solid"}}>
+     <div style={{border: "1px solid", display: 'inline-block', padding: '10px'}}>
        <p>我是com组件</p>
        <p>{ this.state.num }</p>
        <button onClick={ () => {this.increase()} }>++ 绑定事件方式1</button>
