@@ -26,7 +26,7 @@ export default class App extends Component {
   }
 
   changeStr = () => {
-    let action = getChangeStr(); // action 方法封装
+    let action = getChangeStr({city: '厦门', id: 2}); // action 方法封装 以及传参
     store.dispatch(action); //分发 action。这是触发 state 变化的惟一途径。
   }
 
@@ -40,6 +40,9 @@ export default class App extends Component {
       <div className="App">
         hello my-react
         <h1>数据：{ this.state.str }</h1>
+        {
+          this.state.strData && <h2>{this.state.strData.city}</h2>
+        }
         <h1>数据name：{ this.state.fullName }</h1>
         <button onClick={ this.changeStr }>修改redux数据</button>
         <button onClick={ this.changeFullName }>修改reduxFullName数据</button>

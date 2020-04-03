@@ -10,6 +10,8 @@ export default (state = dataState, action) => {
   switch (action.type) {
     case CHANGE_STR:
       newState.str = 'newState新数据';
+      newState.strData = action.data;
+      console.log("action方法传参", action.data)
       return newState;  // 返回新状态，触发变化监听器
       // break;
     case CHANGE_FULLNAME:
