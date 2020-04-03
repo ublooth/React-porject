@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import store from '../../store/index'
+import {getChangeStr, getChangeName} from '../../store/actionCreator'
 
 export default class App extends Component {
   constructor(props) {
@@ -15,9 +16,8 @@ export default class App extends Component {
     this.unsubscribe = store.subscribe(this.changeStoreStr.bind(this)); // 变化监听器
   }
 
-  // 取消订阅
   componentWillUnmount() { // 在组件从 DOM 中移除之前立刻被调用
-    this.unsubscribe();
+    this.unsubscribe(); // 取消订阅
   }
 
   changeStoreStr() {
@@ -26,16 +26,12 @@ export default class App extends Component {
   }
 
   changeStr = () => {
-    let action = {
-      type: 'change_str', // 提交说明
-    }
+    let action = getChangeStr(); // action 方法封装
     store.dispatch(action); //分发 action。这是触发 state 变化的惟一途径。
   }
 
   changeFullName = () => {
-    let action = {
-      type: 'change_fullname',
-    }
+    let action = getChangeName(); // action 方法封装
     store.dispatch(action)
   }
 
