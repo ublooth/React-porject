@@ -57,7 +57,7 @@ npm install react-router-dom --save
 ### 状态管理：Redux 是 JavaScript 状态容器，提供可预测化的状态管理
 
 ### redux在什么时候使用
-1. 组件传传值比较复杂的情况下
+1. 组件传值比较复杂的情况下
 2. 共享数据
 
 ### 安装

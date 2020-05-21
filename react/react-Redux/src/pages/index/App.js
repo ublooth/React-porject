@@ -6,23 +6,26 @@ import {getChangeStr, getChangeName} from '../../store/actionCreator'
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = store.getState();
-    // store.subscribe(this.changeStoreStr.bind(this)); // 变化监听器
+    this.state = {
+      data: store.getState()
+    };
   }
 
   componentDidMount() { // 在第一次渲染后调用
     console.log('store.getState()返回应用当前的 state 树。', store.getState())
     // 订阅 store 的变化
-    this.unsubscribe = store.subscribe(this.changeStoreStr.bind(this)); // 变化监听器
+    this.unsubscribe = store.subscribe(this.changeStoreStr); // 变化监听器
   }
 
   componentWillUnmount() { // 在组件从 DOM 中移除之前立刻被调用
     this.unsubscribe(); // 取消订阅
   }
 
-  changeStoreStr() {
-    console.log('变化store.getState()', store.getState())
-    this.setState(store.getState())
+  changeStoreStr = () => {
+    // store变化时执行
+    this.setState({
+      data: store.getState()
+    })
   }
 
   changeStr = () => {
@@ -39,11 +42,11 @@ export default class App extends Component {
     return (
       <div className="App">
         hello my-react
-        <h1>数据：{ this.state.str }</h1>
+        <h1>数据：{ this.state.data.str }</h1>
         {
-          this.state.strData && <h2>{this.state.strData.city}</h2>
+          this.state.data.strData && <h2>{this.state.data.strData.city}</h2>
         }
-        <h1>数据name：{ this.state.fullName }</h1>
+        <h1>数据name：{ this.state.data.fullName }</h1>
         <button onClick={ this.changeStr }>修改redux数据</button>
         <button onClick={ this.changeFullName }>修改reduxFullName数据</button>
         <ul>
