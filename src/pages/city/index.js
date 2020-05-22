@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { currentcity, searchplace } from '../../api/api'
-import { setStore, getStore } from '../../utils/commons'
+import { setStore, getStore, removeStore } from '../../utils/commons'
 import './index.scss'
 import { Toast } from 'antd-mobile';
 
@@ -22,7 +22,6 @@ class City extends Component {
     this.getStoreData(); // 获取搜索记录
   }
   getStoreData() {
-    console.log('---====', getStore('cityStore'))
     if(getStore('cityStore')) {
       this.setState({ // 搜索历史记录
         storeData: JSON.parse(getStore('cityStore'))
@@ -84,7 +83,6 @@ class City extends Component {
   }
   clickCity(item) {
     let localCity = getStore('cityStore');
-    console.log('====', localCity)
     if(localCity) {
       localCity = JSON.parse(localCity)
       let localCityBool = false;
@@ -98,12 +96,34 @@ class City extends Component {
         localCity = localCity.concat(item)
       }
     } else {
-      localCity = localCity.concat(item)
+      localCity = [item]
     }
-    setStore('cityStore', localCity)
+    setStore('cityStore', localCity) // 跳转页面
+    console.log(item, '-----')
+    this.props.history.push({
+      pathname: '/index',
+      query: {
+        geohash: item.geohash
+      }
+    })
+  }
+
+  emptyAll = () => { // 清空所有
+    removeStore('cityStore');
+    this.getStoreData(); // 获取搜索记录
+  }
+
+  eliminate = () => {
+    this.setState({
+      searchData: ''
+    },() => {
+      // 删除输入框文字
+      this.myInput.focus()
+      // this.myInput.value=''
+    })
   }
   render() {
-    const {searchArr, searchBool, storeData, searchClickBool} = this.state;
+    const {searchArr, searchBool, storeData, searchClickBool, searchData} = this.state;
     return(
       <div className="city">
         <div className="head-head">
@@ -112,8 +132,15 @@ class City extends Component {
           <span className="tapi" onClick={ this.toGoBack.bind(this) }>切换城市</span>
         </div>
         <div className="search">
-          <div>
-            <input type="text" className="text-input" onChange={ this.change.bind(this) } defaultValue={this.state.searchData} placeholder="输入学校、商务楼、地址"/>
+          <div className="search-input">
+            <input
+              type="text"
+              className="text-input"
+              onChange={ this.change.bind(this) }
+              value={searchData}
+              ref={myInput => this.myInput = myInput}
+              placeholder="输入学校、商务楼、地址"/>
+            {searchData && <span className="g-right" onClick={this.eliminate}></span>}
           </div>
           <div>
             <button onClick={ this.searchClick.bind(this) }>提交</button>
@@ -143,7 +170,7 @@ class City extends Component {
             }
           </ul>
         </div>
-        { storeData && storeData.length && <div className="emptyingAll">清空所有</div> }
+        { storeData && storeData.length && <div className="emptyingAll" onClick={ this.emptyAll }>清空所有</div> }
       </div>
     );
   }

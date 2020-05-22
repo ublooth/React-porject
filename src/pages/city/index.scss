@@ -48,6 +48,33 @@
       margin: 0px auto;
       padding-top: 10px;
     }
+    .search-input {
+      position: relative;
+      .g-right {
+        position: absolute;
+        top: 58%;
+        right: 2%;
+        display: inline-block;
+        width: 15px;
+        height: 2px;
+        background: #999;
+        line-height: 0;
+        font-size: 0;
+        vertical-align: middle;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+      }
+      .g-right:after {
+        content: "/";
+        display: block;
+        width: 15px;
+        height: 2px;
+        background: #999;
+        transform: rotate(-90deg);
+        -webkit-transform: rotate(-90deg);
+      }
+    }
+    
     .text-input,
     button {
       @include wh(100%, 30px);
