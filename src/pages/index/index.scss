@@ -1,0 +1,55 @@
+@import "../style/mixin.scss";
+
+.index-box {
+  .head-head {
+    span {
+      display: inline-block;
+      vertical-align: top;
+    }
+    .span-icon {
+      margin-left: 20px;
+      .am-icon {
+        vertical-align: middle;
+      }
+    }
+    .span-name {
+      width: 50%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      @include sc(18px, #fff);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .span-signIn {
+      @include sc(16px, #fff);
+      position: absolute;
+      right: 15px;
+    }
+  }
+  .div-swiper {
+    margin-top: 45px;
+    background: #fff;
+
+    .swiper-slide {
+      padding-bottom: 30px;
+      ul {
+        li {
+          display: inline-block;
+          width: 25%;
+          text-align: center;
+          div {
+            width: 42px;
+            margin: 5px auto 5px;
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -58,3 +58,8 @@ export const currentcity = (number, obj) => get('/v1/cities/' + number, obj);
 
 // 搜索地址
 export const searchplace = (obj) => get('/v1/pois/', obj);
+export const getBannerList = (geohash) => get('/v2/index_entry', {
+  geohash,
+  group_type: '1',
+	'flags[]': 'F'
+});
