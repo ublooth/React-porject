@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 axios.interceptors.response.use(response => { // 请求正确
-  if (response.status === 200 && response.data) {
+  if (response.status === 200) {
     // console.log('response', response)
     return response;
   } else {
@@ -35,7 +35,7 @@ let timer = date.getTime().toString();
 //   })
 // }
 function get(url, params) {
-  params.t = timer;
+  // params.t = timer;
   return axios({
     method: 'GET',
     url: url,
@@ -58,8 +58,16 @@ export const currentcity = (number, obj) => get('/v1/cities/' + number, obj);
 
 // 搜索地址
 export const searchplace = (obj) => get('/v1/pois/', obj);
+
+//  获取msite页面食品分类列表
 export const getBannerList = (geohash) => get('/v2/index_entry', {
   geohash,
   group_type: '1',
 	'flags[]': 'F'
 });
+
+// cityGuess获取首页默认地址
+export const cityGuess = (obj) => get('/v1/cities', obj)
+
+// 页面地址信息
+export const msiteAddress = (obj) => get(`/v2/pois/${obj}`)

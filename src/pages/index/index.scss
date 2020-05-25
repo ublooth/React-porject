@@ -13,6 +13,7 @@
       }
     }
     .span-name {
+      text-align: center;
       width: 50%;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -32,7 +33,7 @@
   .div-swiper {
     margin-top: 45px;
     background: #fff;
-
+    border-bottom: 1px solid #ccc;
     .swiper-slide {
       padding-bottom: 30px;
       ul {
@@ -46,6 +47,55 @@
             img {
               width: 100%;
               height: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+  .business {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    background-color: #fff;
+    .head {
+      @include sc(12px, #999);
+      line-height: 30px;
+      padding-left: 15px;
+    }
+    .business-list {
+      li {
+        padding: 16px 10px;
+        span{
+          display: inline-block;
+          vertical-align: top;
+        }
+        .span-img {
+          @include wh(63px, 63px);
+          margin-right: 10px;
+          img {
+            @include wh(100%, auto);
+          }
+        }
+        .span-item {
+          width: calc(100% - 73px);
+          .name {
+            span {
+              vertical-align: middle;
+            }
+            span:nth-child(1) {
+              padding: 0 3px;
+              border-radius: 3px;
+              line-height: 16px;
+              background-color: #ffd930;
+              @include sc(12px, #333);
+              margin-right: 10px;
+            }
+            span:nth-child(2) {
+              @include sc(16px, #333);
+            }
+            span:nth-child(3) {
+              @include sc(10px, #f1f1f1);
+              float: right;
             }
           }
         }

@@ -1,0 +1,1 @@
+export const SET_GEOHASH = 'set_geohash'
