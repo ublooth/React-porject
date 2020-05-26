@@ -19,8 +19,8 @@ axios.interceptors.response.use(response => { // 请求正确
 })
 
 // 解决http请求的缓存问题,加一个时间戳
-let date = new Date();
-let timer = date.getTime().toString();
+// let date = new Date();
+// let timer = date.getTime().toString();
 
 // function post(method, url, obj) {
 //   obj.t = timer;

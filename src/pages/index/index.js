@@ -10,7 +10,7 @@ import image from '../../assete/1111.jpeg'
 import { getBannerList, cityGuess, msiteAddress } from '../../api/api'
 import store from '../../store/index'
 import {setGeohash} from '../../store/actionCreator'
-// import ratingStar from '../components/ratingStar.js'
+import RatingStar from '../../components/ratingStar/index.js'
 
 class Index extends Component {
   constructor(props) {
@@ -115,8 +115,7 @@ class Index extends Component {
                   <span>保准票</span>
                 </div>
                 <div className="sales">
-                  {/* <ratingStar
-                  ></ratingStar> */}
+                  <RatingStar></RatingStar>
                 </div>
                 <div className="time"></div>
               </span>

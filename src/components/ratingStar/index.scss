@@ -1,0 +1,34 @@
+.xing_body {
+  background-color: #dcdcdc;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+  margin: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2px;
+  svg {
+    width: 11px!important;
+    height: 11px!important;
+    z-index: 999;
+  }
+}
+
+.xing {
+  display: flex;
+  margin: 10px 0;
+}
+
+.jindu {
+  width: 0px;
+  height: 100%;
+  background-color: #ff5610;
+  position: absolute;
+  left: 0;
+}
