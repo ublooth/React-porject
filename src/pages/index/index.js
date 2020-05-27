@@ -5,12 +5,12 @@ import './index.scss'
 import Swiper from 'swiper/js/swiper.js';
 //引入样式，还可以加上自己的样式
 import 'swiper/css/swiper.min.css';
-// import image from '../../assete/1111.jpeg'
 
 import { getBannerList, cityGuess, msiteAddress, shopList } from '../../api/api'
 import store from '../../store/index'
 import {setGeohash, setLatlon} from '../../store/actionCreator'
 import RatingStar from '../../components/ratingStar/index.js'
+import MenuBar from '../../components/menuBar'
 
 class Index extends Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class Index extends Component {
   componentDidMount() { // 在第一次渲染后调用
     // console.log('获取路由', this.props.location)  // 获取URL参数
     //31.23338,121.50126
+    console.log(this.props.match)
     if(!this.props.location.query) {
       cityGuess({type: 'guess'}).then(res => {
         console.log(res, '-------')
@@ -148,21 +149,32 @@ class Index extends Component {
                         childEvevnt={this.childEvevnt}
                       ></RatingStar>
                       <span className="fraction">{item.rating}</span>
-                      <span className="yue">月售101单</span>
+                      <span className="yue">月售{item.recent_order_num}单</span>
                     </div>
                     <div className="sales-div">
-                      <span>蜂鸟专送</span>
-                      <span>准时达</span>
+                      {item.delivery_mode && <span>{item.delivery_mode.text}</span>}
+                      {item.supports instanceof Array && item.supports.length && item.supports.map(item => {
+                        if (item.icon_name === '准') {
+                          return true;
+                        } else {
+                          return false
+                        }
+                      }) && <span>准时达</span>}
                     </div>
                   </div>
                   <div className="time">
                     <span className="give">
-                      <p>￥20起送<span>/</span>配送费约￥5</p>
+                    <p>￥{item.float_minimum_order_amount}起送<span>/</span>{item.piecewise_agent_fee.tips}</p>
                     </span>
                     <span className="kilometre">
-                      <span>288.4公里</span>
-                      <span> / </span>
-                      <span>3小时21分钟</span>
+                      {Number(item.distance) ? <span>
+                        {item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}/
+                      </span> : <span>
+                        <span>{item.distance}</span>
+                        <span> / </span>
+                        <span>{item.order_lead_time}</span>
+                      </span>
+                      }
                     </span>
                   </div>
                 </span>
@@ -170,6 +182,9 @@ class Index extends Component {
             ))}
           </ul>
         </div>
+        <MenuBar
+          url={ this.props.match.path }
+        ></MenuBar>
       </div>
     )
   }

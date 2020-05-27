@@ -16,7 +16,7 @@ class ratingStar extends Component {
       this.setStar(this.props.num)
     }
   }
-  
+
   setStar(num) {
     let str = document.querySelectorAll('#id' + this.props.index)
     let r = /^[0-9]*[1-9][0-9]*$/　　//正整数
@@ -58,7 +58,8 @@ class ratingStar extends Component {
 }
 
 ratingStar.propTypes = {
-  num: PropTypes.number, // 
+  num: PropTypes.number,
+  index: PropTypes.number,
 }
 
 export default ratingStar;

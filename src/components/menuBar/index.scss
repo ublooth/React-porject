@@ -1,0 +1,30 @@
+@import "../../pages/style/mixin.scss";
+
+.menuBar-box {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  @include wh(100%, 45px);
+  background-color: #fff;
+  ul {
+    @include wh(100%, 45px);
+    display: flex;
+    li {
+      @include wh(25%, 100%);
+      text-align: center;
+      a {
+        display: inline-block;
+      }
+      .img {
+        @include wh(18px, 18px);
+        margin: 5px auto;
+        img {
+          @include wh(100%, auto);
+        }
+      }
+      p {
+        @include sc(12px, #666);
+      }
+    }
+  }
+}
