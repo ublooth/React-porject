@@ -99,7 +99,7 @@ class City extends Component {
       localCity = [item]
     }
     setStore('cityStore', localCity) // 跳转页面
-    console.log(item, '-----')
+    // console.log(item, '-----')
     this.props.history.push({
       pathname: '/index',
       query: {

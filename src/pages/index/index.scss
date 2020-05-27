@@ -65,6 +65,7 @@
     .business-list {
       li {
         padding: 16px 10px;
+        border-bottom: 1px solid #f1f1f1;
         span{
           display: inline-block;
           vertical-align: top;
@@ -73,7 +74,7 @@
           @include wh(63px, 63px);
           margin-right: 10px;
           img {
-            @include wh(100%, auto);
+            @include wh(100%, 100%);
           }
         }
         .span-item {
@@ -82,7 +83,7 @@
             span {
               vertical-align: middle;
             }
-            span:nth-child(1) {
+            .one {
               padding: 0 3px;
               border-radius: 3px;
               line-height: 16px;
@@ -90,12 +91,68 @@
               @include sc(12px, #333);
               margin-right: 10px;
             }
-            span:nth-child(2) {
+            .two {
               @include sc(16px, #333);
             }
-            span:nth-child(3) {
+            .icon_name {
               @include sc(10px, #f1f1f1);
               float: right;
+            }
+          }
+          .sales {
+            .sales-div {
+              display: inline-block;
+            }
+            margin-top: 10px;
+            .fraction {
+              @include sc(12px, #ff6000);
+              margin-left: 5px;
+              vertical-align: middle;
+            }
+            .yue {
+              margin-left: 5px;
+              @include sc(12px, #666);
+              vertical-align: middle;
+            }
+            .sales-div:nth-child(2) {
+              float: right;
+              span {
+                display: inline-block;
+                vertical-align: middle;
+              }
+              span:nth-child(1) {
+                @include sc(10px, #fff);
+                background-color: #3190e8;
+                border-radius: 3px;
+                padding: 0 2px;
+              }
+              span:nth-child(2) {
+                border: 1px solid #3190e8;
+                @include sc(10px, #3190e8);
+                background-color: #fff;
+                border-radius: 3px;
+                padding: 0 2px;
+                margin-left: 5px;
+              }
+            }
+          }
+          .time {
+            margin-top: 10px;
+            .give {
+              @include sc(10px, #666);
+            }
+            .kilometre {
+              font-size: 10px;
+              float: right;
+              span:nth-child(1) {
+                color: #999;
+              }
+              span:nth-child(2) {
+                color: #ccc;
+              }
+              span:nth-child(3) {
+                color: #3190e8;
+              }
             }
           }
         }
