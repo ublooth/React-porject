@@ -1,1 +1,131 @@
 @import "../../pages/style/mixin.scss";
+.search-box {
+  padding: 45px 0;
+  .g-right {
+    display: inline-block;
+    width: 15px;
+    height: 2px;
+    background: #999;
+    line-height: 0;
+    font-size: 0;
+    vertical-align: middle;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  .g-right:after {
+    content: "/";
+    display: block;
+    width: 15px;
+    height: 2px;
+    background: #999;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+  }
+  .head-head {
+    .name {
+      font-weight: 800;
+      font-size: 20px;
+    }
+  }
+  .search-click-box {
+    position: relative;
+    @include wh(100%, auto);
+    padding: 12px;
+    background-color: #fff;
+    input {
+      height: 35px;
+      border: 1px solid;
+      padding: 0 0.25rem;
+      font-weight: bold;
+      border-radius: 0.125rem;
+      font-size: 14px;
+    }
+    input:nth-child(1) {
+      width: 87%;
+      flex: 4;
+      border: 1px solid #e4e4e4;
+      color: #333;
+      background-color: #f2f2f2;
+    }
+    input:nth-child(2) {
+      flex: 1;
+      border: 0.025rem solid #3190e8;
+      margin-left: .2rem;
+      color: #fff;
+      background-color: #3190e8;
+    }
+    .input-g-right {
+      position: absolute;
+      top: 50%;
+      right: 18%;
+    }
+  }
+  .search-list,
+  .search-history {
+    h4 {
+      line-height: 45px;
+      text-indent: 10px;
+    }
+    .search-list-ul {
+      background-color: #fff;
+      padding: 0 0 10px 0;
+      li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        .li-div {
+          display: inline-block;
+          vertical-align: top;
+        }
+        .li-div:nth-child(1) {
+          width: 10%;
+          margin-right: 8px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+        .li-div:nth-child(2) {
+          width: calc(90% - 8px);
+          border-bottom: 1px solid #e4e4e4;
+          p {
+            padding: 0px 0 5px 0;
+            @include sc(12px, #333);
+          }
+          p:nth-child(1) {
+            span,
+            svg {
+              margin-right: 5px;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+    }
+  }
+  .search-history {
+    .search-history-ul {
+      background-color: #fff;
+      li {
+        line-height: 30px;
+        @include sc(16px, #333);
+        padding: 0 5px;
+        text-align: right;
+        position: relative;
+        border-bottom: 1px solid #e4e4e4;
+        span:nth-child(1) {
+          position: absolute;
+          left: 5px;
+        }
+        .history-g-right {
+          // float: right;
+        }
+      }
+      .clearSearch {
+        line-height: 50px;
+        @include sc(20px, #3190e8);
+        font-weight: 800;
+        text-align: center;
+      }
+    }
+  }
+}

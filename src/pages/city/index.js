@@ -102,7 +102,6 @@ class City extends Component {
     }
     setStore('cityStore', localCity) 
     // console.log(item, '-----')
-    console.log('item', item)
     let str = setLatlon({lat: item.latitude, lon: item.longitude})
     store.dispatch(str)
     this.props.history.push('/index/' + item.geohash)

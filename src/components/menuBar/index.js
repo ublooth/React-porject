@@ -36,7 +36,7 @@ class menuBar extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/search">
+            <Link to={ '/search/' + storeData.geohash }>
               <div className="img">
                 {
                   this.props.url === "/search" ? <Icon type="search" size={'xs'} color="#1c6cdc" /> : <Icon type="search" size={'xs'} color="#666" />

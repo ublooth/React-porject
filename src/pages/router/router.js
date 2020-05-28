@@ -16,7 +16,7 @@ const router = () => (
       <Route path="/city/:id" exact component={ City }></Route>
       <Route path="/index/:geohash" exact component={ Index }></Route>
       <Route path="/me" exact component={ Me }></Route>
-      <Route path="/search" exact component={ Search }></Route>
+      <Route path="/search/:geohash" exact component={ Search }></Route>
       <Route path="/order" exact component={ Order }></Route>
       <Redirect to='/' />
     </Switch>

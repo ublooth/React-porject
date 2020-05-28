@@ -100,3 +100,14 @@ export const shopList = (latitude, longitude, offset, restaurant_category_id = '
 	};
 	return get('/shopping/restaurants', data);
 };
+
+/**
+ * 获取search页面搜索结果
+ */
+
+export const searchRestaurant = (geohash, keyword) => get('/v4/restaurants', {
+	'extras[]': 'restaurant_activity',
+	geohash,
+	keyword,
+	type: 'search'
+});
