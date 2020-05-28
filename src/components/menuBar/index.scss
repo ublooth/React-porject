@@ -6,6 +6,7 @@
   bottom: 0;
   @include wh(100%, 45px);
   background-color: #fff;
+  z-index: 99999;
   ul {
     @include wh(100%, 45px);
     display: flex;

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Toast } from 'antd-mobile';
 
 axios.interceptors.response.use(response => { // 请求正确
   if (response.status === 200) {
@@ -12,8 +13,10 @@ axios.interceptors.response.use(response => { // 请求正确
   const response = error.response
   if (response.status === 401) {
     console.log('401')
+    Toast.info('请求失败', 2);
   } else {
     console.log('else 401')
+    Toast.info('请求失败', 2);
   }
   return Promise.resolve(error.response); // 转为 Promise 对象 
 })

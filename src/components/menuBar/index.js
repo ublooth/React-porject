@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './index.scss'
 import { Icon } from 'antd-mobile';
 import { Link } from 'react-router-dom'
+import store from '../../store/index'
 
 
 import home_n from '../../assete/home-n.png'
@@ -20,12 +21,12 @@ class menuBar extends Component {
 
   }
   render() {
-    console.log('ttttt', this.props)
+    let storeData = store.getState()
     return (
       <div className="menuBar-box">
         <ul>
           <li>
-            <Link to="/index">
+            <Link to={ '/index/' + storeData.geohash }>
               <div className="img">
                 {
                   this.props.url === "/index" ? <img src={home_y} alt=""></img> : <img src={home_n} alt=""></img>
@@ -40,7 +41,6 @@ class menuBar extends Component {
                 {
                   this.props.url === "/search" ? <Icon type="search" size={'xs'} color="#1c6cdc" /> : <Icon type="search" size={'xs'} color="#666" />
                 }
-                
               </div>
               <p>搜索</p>
             </Link>
@@ -51,7 +51,6 @@ class menuBar extends Component {
                 {
                   this.props.url === "/order" ? <img src={hm_y} alt=""></img> : <img src={hm_n} alt=""></img>
                 }
-                {/* <img src={hm_n} alt=""></img> */}
               </div>
               <p>订单</p>
             </Link>
@@ -62,7 +61,6 @@ class menuBar extends Component {
                 {
                   this.props.url === "/me" ? <img src={me_y} alt=""></img> : <img src={me_n} alt=""></img>
                 }
-                {/* <img src={me_n} alt=""></img> */}
               </div>
               <p>我的</p>
             </Link>

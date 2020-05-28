@@ -3,6 +3,8 @@ import { currentcity, searchplace } from '../../api/api'
 import { setStore, getStore, removeStore } from '../../utils/commons'
 import './index.scss'
 import { Toast } from 'antd-mobile';
+import store from '../../store/index'
+import {setLatlon} from '../../store/actionCreator'
 
 class City extends Component {
   constructor(props) {
@@ -98,14 +100,18 @@ class City extends Component {
     } else {
       localCity = [item]
     }
-    setStore('cityStore', localCity) // 跳转页面
+    setStore('cityStore', localCity) 
     // console.log(item, '-----')
-    this.props.history.push({
-      pathname: '/index',
-      query: {
-        geohash: item.geohash
-      }
-    })
+    console.log('item', item)
+    let str = setLatlon({lat: item.latitude, lon: item.longitude})
+    store.dispatch(str)
+    this.props.history.push('/index/' + item.geohash)
+    // this.props.history.push({
+    //   pathname: '/index',
+    //   query: {
+    //     geohash: item.geohash
+    //   }
+    // })
   }
 
   emptyAll = () => { // 清空所有

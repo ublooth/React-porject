@@ -22,40 +22,84 @@ class Index extends Component {
       title: '',
       offset: 0, // 批次加载店铺列表，每次加载20个 limit = 20
       restaurantCategoryId: '',
-      shopListDataArr: []
+      shopListDataArr: [],
+      preventRepeatReuqest: false, //到达底部加载数据，防止重复加载
+      touchend: false, //没有更多数据
+      topButton: false,
     }
   }
   componentDidMount() { // 在第一次渲染后调用
-    // console.log('获取路由', this.props.location)  // 获取URL参数
-    //31.23338,121.50126
-    console.log(this.props.match)
-    if(!this.props.location.query) {
+    // console.log('获取路由', this.props.match)  // 获取URL参数
+    if(!this.props.match.params.geohash) {
       cityGuess({type: 'guess'}).then(res => {
         console.log(res, '-------')
 
       })
-      this.getBannerListData(31.23338,121.50126)
+      this.getStoreData()
+      this.getBannerListData(store.getState().geohash)
     } else {
-      let action = setGeohash(this.props.location.query.geohash);
+      let action = setGeohash(this.props.match.params.geohash);
       store.dispatch(action); //分发 action
-      this.getBannerListData(this.props.location.query.geohash)
-      msiteAddress(this.props.location.query.geohash).then(res => {
+      this.getBannerListData(this.props.match.params.geohash)
+      msiteAddress(this.props.match.params.geohash).then(res => {
         let str = setLatlon({lat: res.data.latitude, lon: res.data.longitude})
         store.dispatch(str)
         this.setState({
           title: res.data.name
         })
-        this.getStoreData()
+        this.getStoreData() // 店铺列表
       })
     }
+
   }
-  
-  getStoreData() {
-    let obj = store.getState()
-    shopList(obj.latitude, obj.longitude, this.state.offset, this.state.restaurantCategoryId).then(res => {
-      // console.log('-----', res)
-      this.setState({
-        shopListDataArr: res.data
+  UNSAFE_componentWillMount() {
+    // let bodyHeight = document.body.scrollHeight; // 浏览器所有内容高度
+    let clientHeight = document.documentElement.clientHeight || document.body.clientHeight //浏览器可视部分高度
+    window.addEventListener('scroll', () => {
+      let scroll_Top = document.body.scrollTop || document.documentElement.scrollTop // 浏览器滚动部分高度
+      if(scroll_Top + clientHeight === document.body.scrollHeight) {
+        // console.log('到底部了！！')
+        this.setState({
+          offset: this.state.offset + 20
+        }, () => {
+          this.getStoreData()
+        })
+      }
+      if(scroll_Top > clientHeight) {
+        this.setState({
+          topButton: true
+        })
+      } else {
+        this.setState({
+          topButton: false
+        })
+      }
+    })
+  }
+ 
+  getStoreData() { // 店铺列表
+    if(this.state.touchend) { //无数据
+      return
+    }
+    if(this.state.preventRepeatReuqest) { //防止重复请求
+      return
+    }
+    this.setState({
+      preventRepeatReuqest: true
+    }, () => {
+      let obj = store.getState()
+      shopList(obj.latitude, obj.longitude, this.state.offset, this.state.restaurantCategoryId).then(res => {
+        // console.log('-----', res)
+        this.setState({
+          shopListDataArr: [...this.state.shopListDataArr, ...res.data],
+          preventRepeatReuqest: false
+        })
+        // 获取数据小于20，说明没有更多数据，不需要再次请求数据
+        if(res.data.length < 20) {
+          this.setState({
+            touchend: true, //没有更多数据
+          })
+        }
       })
     })
   }
@@ -89,10 +133,17 @@ class Index extends Component {
       })
     })
   }
+  setScrollTop() { // 返回顶部
+    window.scrollTo({
+      left: 0,
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
   render() {
-    const { bannerData, imgBaseUrl, title, shopListDataArr, imgBaseUrl2 } = this.state
+    const { bannerData, imgBaseUrl, title, shopListDataArr, imgBaseUrl2, touchend, topButton } = this.state
     return (
-      <div className="index-box">
+      <div className="index-box" ref={node => this.contentNode = node}>
         <div className="head-head">
           <span className="span-icon">
             <Icon type="search" size={'md'} color="#fff"/>
@@ -130,7 +181,7 @@ class Index extends Component {
             附近商家
           </div>
           <ul className="business-list">
-            {shopListDataArr.length && shopListDataArr.map((item, i) => (
+            {shopListDataArr.length ? shopListDataArr.map((item, i) => (
               <li key={i}>
                 <span className="span-img"><img src={imgBaseUrl2 + item.image_path} alt=""></img></span>
                 <span className="span-item">
@@ -179,12 +230,14 @@ class Index extends Component {
                   </div>
                 </span>
               </li>
-            ))}
+            )) : <p>暂无数据</p>}
+            {touchend && <p>没有更多了！</p>}
           </ul>
         </div>
         <MenuBar
           url={ this.props.match.path }
         ></MenuBar>
+        {topButton && <button onClick={this.setScrollTop.bind(this)}>Up</button>}
       </div>
     )
   }

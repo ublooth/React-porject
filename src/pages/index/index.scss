@@ -1,6 +1,9 @@
 @import "../style/mixin.scss";
 
 .index-box {
+  overflow-y: scroll;
+  height: 100%;
+  padding-top: 45px;
   .head-head {
     span {
       display: inline-block;
@@ -31,7 +34,7 @@
     }
   }
   .div-swiper {
-    margin-top: 45px;
+    // margin-top: 45px;
     background: #fff;
     border-bottom: 1px solid #ccc;
     .swiper-slide {
@@ -57,6 +60,7 @@
     border-top: 1px solid #ccc;
     margin-top: 10px;
     background-color: #fff;
+    height: calc(100% - 273px);
     .head {
       @include sc(12px, #999);
       line-height: 30px;
@@ -158,6 +162,21 @@
           }
         }
       }
+      p {
+        @include sc(12px, #666);
+        text-align: center;
+        padding: 10px 0;
+      }
     }
+  }
+  button {
+    position: fixed;
+    bottom: 65px;
+    right: 25px;
+    padding: 3px;
+    border: none;
+    background-color: #3190e8;
+    border-radius: 3px;
+    @include sc(12px, #fff)
   }
 }
