@@ -218,13 +218,14 @@ class Index extends Component {
                     <p>￥{item.float_minimum_order_amount}起送<span>/</span>{item.piecewise_agent_fee.tips}</p>
                     </span>
                     <span className="kilometre">
-                      {Number(item.distance) ? <span>
-                        {item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}/
-                      </span> : <span>
-                        <span>{item.distance}</span>
-                        <span> / </span>
-                        <span>{item.order_lead_time}</span>
-                      </span>
+                      {
+                        Number(item.distance) ? <span>
+                          {item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}/
+                        </span> : <span>
+                          <span>{item.distance}</span>
+                          <span> / </span>
+                          <span>{item.order_lead_time}</span>
+                        </span>
                       }
                     </span>
                   </div>

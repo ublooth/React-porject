@@ -112,12 +112,12 @@
         text-align: right;
         position: relative;
         border-bottom: 1px solid #e4e4e4;
-        span:nth-child(1) {
+        .history {
           position: absolute;
           left: 5px;
         }
         .history-g-right {
-          // float: right;
+          display: inline-block;
         }
       }
       .clearSearch {
