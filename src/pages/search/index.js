@@ -99,7 +99,7 @@ class search extends Component {
     })
   }
   removeHistory(i, e) {
-    e.stopPropagation();
+    e.stopPropagation(); // 阻止事件冒泡
     let arr = this.state.searchHistory;
     this.state.searchHistory.splice(i, 1)
     this.setState({
