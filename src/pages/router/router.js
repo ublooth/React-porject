@@ -7,6 +7,7 @@ import Index from '../index/index';
 import Me from '../me/index';
 import Order from '../order/index';
 import Search from '../search/index';
+import Food from '../food/index';
 
 
 const router = () => (
@@ -18,6 +19,7 @@ const router = () => (
       <Route path="/me" exact component={ Me }></Route>
       <Route path="/search/:geohash" exact component={ Search }></Route>
       <Route path="/order" exact component={ Order }></Route>
+      <Route path="/food/:geohash/:title/:id" exact component={ Food }></Route>
       <Redirect to='/' />
     </Switch>
   </BrowserRouter>

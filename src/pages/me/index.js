@@ -16,7 +16,6 @@ class me extends Component {
     this.props.history.go(-1); // 返回上一级路由
   }
   render() {
-    const {} = this.state
     return (
       <div className="me-box">
         <div className="head-head">

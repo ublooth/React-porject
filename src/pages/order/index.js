@@ -8,9 +8,16 @@ class order extends Component {
 
     }
   }
+  toGoBack() {
+    this.props.history.go(-1); // 返回上一级路由
+  }
   render() {
     return (
-      <div>order
+      <div>
+        <div className="head-head">
+          <span className="more" onClick={this.toGoBack.bind(this)}></span>
+          <span className="name" style={{fontWeight: 800,}}>订单列表</span>
+        </div>
         <MenuBar
           url={ this.props.match.path }
         ></MenuBar>

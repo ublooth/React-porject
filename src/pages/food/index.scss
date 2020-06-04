@@ -1,0 +1,46 @@
+@import "../../pages/style/mixin.scss";
+
+.food-box {
+  padding-top: 45px;
+  .food-button {
+    @include wh(100%, 37px);
+    background-color: #fff;
+    li {
+      display: inline-block;
+      width: 33.33%;
+      line-height: 37px;
+      border-right: 1px solid #f1f1f1;
+      text-align: center;
+      @include sc(14px, #333);
+      &:last-child {
+        border: none;
+      }
+      span {
+        margin-right: 5px;
+      }
+      // #aaa {
+      //   -webkit-animation:name .3s linear 0ms 1 normal forwards;
+
+      //   -moz-animation:name .3s linear 0ms 1 normal forwards;
+
+      //   -o-animation:name .3s linear 0ms 1 normal forwards;
+
+      //   animation:name .3s linear 0ms 1 normal forwards;
+      //   // transform: rotate(180deg);
+      // }
+      // @keyframes name {
+      //   0% { transform: rotate(0deg)}
+      //   50% { transform: rotate(90deg)}
+      //   100% { transform: rotate(180deg)}
+      // }
+      #aaa {
+        transition: all .3s;
+        transform: rotate(180deg);
+      }
+      #bbb {
+        transition: all .3s;
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

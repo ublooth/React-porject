@@ -140,6 +140,19 @@ class Index extends Component {
       behavior: 'smooth',
     });
   }
+  // 解码url地址，求去restaurant_category_id值
+  getCategoryId(url){
+    let urlData = decodeURIComponent(url.split('=')[1].replace('&target_name',''));
+    if (/restaurant_category_id/gi.test(urlData)) {
+      return JSON.parse(urlData).restaurant_category_id.id
+    }else{
+      return ''
+    }
+  }
+  toFood(str) {
+    let id = this.getCategoryId(str.link)
+    this.props.history.push(`/food/${store.getState().geohash}/${str.title}/${id}`)
+  }
   render() {
     const { bannerData, imgBaseUrl, title, shopListDataArr, imgBaseUrl2, touchend, topButton } = this.state
     return (
@@ -160,7 +173,7 @@ class Index extends Component {
                     <ul>
                       {
                         item.map((str, t) => {
-                          return (<li key={t}>
+                          return (<li key={t} onClick={this.toFood.bind(this, str)}>
                             <div><img src={imgBaseUrl + str.image_url} alt=""></img></div>
                             <p>{str.title}</p>
                           </li>)
